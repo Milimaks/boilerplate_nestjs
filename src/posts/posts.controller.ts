@@ -1,8 +1,19 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { PostsService } from './providers/posts.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { PatchPostDto } from './dtos/patch-post.dto';
+import { GetPostsDto } from './dtos/get-post.dto';
 
 @Controller('posts')
 @ApiTags('Posts')
@@ -18,33 +29,40 @@ export class PostsController {
    * GET localhost:3000/posts/:userId
    */
   @Get('/:userId?')
-  public getPosts(@Param('userId') userId: string) {
+  public getPosts(
+    @Param('userId') userId: string,
+    @Query() postQuery: GetPostsDto,
+  ) {
+    console.log(postQuery);
     return this.postsService.findAll(userId);
   }
 
   @ApiOperation({
-    summary: 'Creates a new post for the blog.',
+    summary: 'Creates a new blog post',
   })
   @ApiResponse({
     status: 201,
-    description:
-      'You get a success 201 response if the post is created successfully',
+    description: 'You get a 201 response if your post is created successfully',
   })
   @Post()
   public createPost(@Body() createPostDto: CreatePostDto) {
-    console.log(createPostDto);
+    return this.postsService.create(createPostDto);
   }
 
   @ApiOperation({
-    summary: 'Updates and existing blog post in the database.',
+    summary: 'Updates an existing blog post',
   })
   @ApiResponse({
     status: 200,
-    description:
-      'You get a success 20o response if the post is updated successfully',
+    description: 'A 200 response if the post is updated successfully',
   })
   @Patch()
-  public updatePost(@Body() patchPostsDto: PatchPostDto) {
-    console.log(patchPostsDto);
+  public updatePost(@Body() patchPostDto: PatchPostDto) {
+    return this.postsService.update(patchPostDto);
+  }
+
+  @Delete()
+  public deletePost(@Query('id', ParseIntPipe) id: number) {
+    return this.postsService.delete(id);
   }
 }
