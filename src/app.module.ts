@@ -28,7 +28,7 @@ import { TagsModule } from './tags/tags.module';
         username: 'postgres',
         password: 'test',
         host: 'localhost',
-        database: 'nestjs-',
+        database: 'stop',
       }),
     }),
     TagsModule,
