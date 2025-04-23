@@ -17,6 +17,10 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      // Implicitly convert to the type of the property (e.g. string to number)
+      transformOptions: {
+        enableImplicitConversion: true,
+      },
     }),
   );
 
