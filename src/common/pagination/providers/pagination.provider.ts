@@ -12,5 +12,6 @@ export class PaginationProvider {
       skip: (paginationQuery.page - 1) * paginationQuery.limit,
       take: paginationQuery.limit,
     });
+    return posts;
   }
 }
