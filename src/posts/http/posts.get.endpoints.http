@@ -6,4 +6,4 @@
 }}
 GET  http://localhost:3000/posts/
   ?limit=1
-  &page=3
+  &page=4
