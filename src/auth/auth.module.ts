@@ -8,8 +8,13 @@ import { BcryptProvider } from './providers/bcrypt.provider';
 
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, HashingProvider, BcryptProvider],
+  providers: [
+    AuthService,
+    // HashingProvider is an interface, so we need to provide a concrete implementation
+    // BcryptProvider is a concrete implementation of HashingProvider
+    { provide: HashingProvider, useClass: BcryptProvider },
+  ],
   imports: [forwardRef(() => UsersModule)],
-  exports: [AuthService],
+  exports: [AuthService, HashingProvider],
 })
 export class AuthModule {}
