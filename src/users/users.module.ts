@@ -9,10 +9,16 @@ import { UsersCreateManyProvider } from './providers/users-create-many.provider'
 import { UsersService } from './providers/users.service';
 import { User } from './user.entity';
 import { UsersController } from './users.controller';
+import { FindOneUserByEmailProvider } from './providers/find-user-by-email.provider';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, UsersCreateManyProvider, CreateUserProvider],
+  providers: [
+    UsersService,
+    UsersCreateManyProvider,
+    CreateUserProvider,
+    FindOneUserByEmailProvider,
+  ],
   exports: [UsersService],
   imports: [
     TypeOrmModule.forFeature([User]),

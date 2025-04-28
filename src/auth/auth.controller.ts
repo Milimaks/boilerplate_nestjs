@@ -1,5 +1,6 @@
+import { SignInDto } from './dtos/signin.dto';
 import { AuthService } from './providers/auth.service';
-import { Controller } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 
 @Controller('auth')
 export class AuthController {
@@ -9,4 +10,9 @@ export class AuthController {
      */
     private readonly authService: AuthService,
   ) {}
+
+  @Post('sign-in')
+  public async signIn(@Body() signInDto: SignInDto) {
+    return await this.authService.signIn(signInDto);
+  }
 }
