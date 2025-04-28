@@ -8,7 +8,4 @@ export class SignInDto {
   @IsNotEmpty({ message: 'Password is required' })
   @IsString({ message: 'Password must be a string' })
   password: string;
-  rememberMe?: boolean;
-  deviceName?: string;
-  deviceId?: string;
 }
