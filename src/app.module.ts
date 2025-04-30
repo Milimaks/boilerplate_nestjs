@@ -1,27 +1,22 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
-import { MetaOptionsModule } from './meta-options/meta-options.module';
-import { Module } from '@nestjs/common';
-import { PostsModule } from './posts/posts.module';
-import { Tag } from './tags/tag.entity';
-import { TagsModule } from './tags/tags.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
-/**
- * Importing Entities
- * */
-import { User } from './users/user.entity';
-import { UsersModule } from './users/users.module';
+import jwtConfig from './auth/config/jwt.config';
+import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
 import { PaginationModule } from './common/pagination/pagination.module';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
-import enviromentValidation from './config/enviroment.validation';
-import jwtConfig from './auth/config/jwt.config';
-import { JwtModule } from '@nestjs/jwt';
-import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
-import { APP_GUARD } from '@nestjs/core';
+import enviromentValidation from './config/environment.validation';
+import { MetaOptionsModule } from './meta-options/meta-options.module';
+import { PostsModule } from './posts/posts.module';
+import { TagsModule } from './tags/tags.module';
+import { UsersModule } from './users/users.module';
 
 // Get the current NODE_ENV
 const ENV = process.env.NODE_ENV;
