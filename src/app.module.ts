@@ -17,6 +17,7 @@ import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { PostsModule } from './posts/posts.module';
 import { TagsModule } from './tags/tags.module';
 import { UsersModule } from './users/users.module';
+import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
 
 // Get the current NODE_ENV
 const ENV = process.env.NODE_ENV;
@@ -60,8 +61,9 @@ const ENV = process.env.NODE_ENV;
     // Injecting the AccessTokenGuard globally
     {
       provide: APP_GUARD,
-      useClass: AccessTokenGuard,
+      useClass: AuthenticationGuard,
     },
+    AccessTokenGuard,
   ],
 })
 export class AppModule {}
