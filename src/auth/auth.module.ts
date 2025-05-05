@@ -9,6 +9,7 @@ import { SignInProvider } from './providers/sign-in.provider';
 import jwtConfig from './config/jwt.config';
 import { ConfigModule } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
+import { GenerateTokenProvider } from './providers/generate-token.provider';
 
 @Module({
   controllers: [AuthController],
@@ -18,6 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
     // BcryptProvider is a concrete implementation of HashingProvider
     { provide: HashingProvider, useClass: BcryptProvider },
     SignInProvider,
+    GenerateTokenProvider,
   ],
   imports: [
     forwardRef(() => UsersModule),
