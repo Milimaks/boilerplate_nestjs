@@ -7,17 +7,14 @@ import {
 } from '@nestjs/common';
 import { UsersService } from 'src/users/providers/users.service';
 import { SignInDto } from '../dtos/signin.dto';
+import { GenerateTokenProvider } from './generate-token.provider';
 import { HashingProvider } from './hashing.provider';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigType } from '@nestjs/config';
-import jwtConfig from '../config/jwt.config';
-import { ActiveUserData } from '../interfaces/active-user-data.interface';
 
 @Injectable()
 export class SignInProvider {
   constructor(
     /**
-     * Injecting ssersService
+     * Injecting usersService
      * This is a forward reference to avoid circular dependency issues.
      * The AuthService depends on UsersService, and vice versa.
      * By using forwardRef, we can inject the UsersService without causing a circular dependency.
@@ -29,14 +26,9 @@ export class SignInProvider {
      */
     private readonly hashingProvider: HashingProvider,
     /**
-     * Injecting JWTService
+     * Inject generateTokensProvider
      */
-    private readonly jwtService: JwtService,
-    /**
-     * Inject jwtConfiguration
-     */
-    @Inject(jwtConfig.KEY)
-    private readonly jwtConfiguration: ConfigType<typeof jwtConfig>,
+    private readonly generateTokensProvider: GenerateTokenProvider,
   ) {}
   public async signIn(signInDto: SignInDto) {
     // Find user using email ID
@@ -60,21 +52,7 @@ export class SignInProvider {
       throw new UnauthorizedException('Invalid password');
     }
 
-    // Generate JWT token using userId and email
-    const accessToken = await this.jwtService.signAsync(
-      {
-        sub: user.id,
-        email: user.email,
-      } as ActiveUserData,
-      {
-        audience: this.jwtConfiguration.audience,
-        issuer: this.jwtConfiguration.issuer,
-        secret: this.jwtConfiguration.secret,
-        expiresIn: this.jwtConfiguration.accessTokenTtl,
-      },
-    );
-    return {
-      accessToken,
-    };
+    // generate refresh token and access token
+    return await this.generateTokensProvider.generateTokens(user);
   }
 }
