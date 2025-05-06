@@ -4,6 +4,8 @@ import { SignInDto } from './dtos/signin.dto';
 import { AuthType } from './enums/auth-type.enum';
 import { AuthService } from './providers/auth.service';
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import { GoogleAuthenticationService } from './social/providers/google-authentication.service';
+import { GoogleTokenDto } from './social/dtos/google-token.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -12,6 +14,10 @@ export class AuthController {
      * Injecting Auth Service
      */
     private readonly authService: AuthService,
+    /**
+     * Inject googleAuthenticationService
+     */
+    private readonly googleAuthenticationService: GoogleAuthenticationService,
   ) {}
 
   @Post('sign-in')

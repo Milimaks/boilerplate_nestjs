@@ -31,7 +31,7 @@ async function bootstrap() {
 
   // Create the swagger configuration
   const config = new DocumentBuilder()
-    .setTitle('NestJS Masterclass - Blog app API')
+    .setTitle('NestJS Boilerplate API')
     .setDescription('Use the base API URL as http://localhost:3000')
     .setTermsOfService('http://localhost:3000/terms-of-service')
     .setLicense(
@@ -47,6 +47,7 @@ async function bootstrap() {
 
   // Enable CORS
   app.enableCors();
+
   await app.listen(3000);
 }
 bootstrap();

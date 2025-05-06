@@ -18,6 +18,7 @@ import { PostsModule } from './posts/posts.module';
 import { TagsModule } from './tags/tags.module';
 import { UsersModule } from './users/users.module';
 import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
+import { CreateGoogleUserProvider } from './users/providers/create-google-user.provider';
 
 // Get the current NODE_ENV
 const ENV = process.env.NODE_ENV;

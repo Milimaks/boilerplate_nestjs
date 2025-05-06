@@ -13,6 +13,7 @@ import { UsersService } from './providers/users.service';
 import { User } from './user.entity';
 import { UsersController } from './users.controller';
 import { FindOneByGooleIdProvider } from './providers/find-one-by-google-id.provider';
+import { CreateGoogleUserProvider } from './providers/create-google-user.provider';
 
 @Module({
   controllers: [UsersController],
@@ -22,6 +23,7 @@ import { FindOneByGooleIdProvider } from './providers/find-one-by-google-id.prov
     CreateUserProvider,
     FindOneUserByEmailProvider,
     FindOneByGooleIdProvider,
+    CreateGoogleUserProvider,
   ],
   exports: [UsersService],
   imports: [
