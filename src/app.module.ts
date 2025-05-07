@@ -1,7 +1,7 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { Module } from '@nestjs/common';
-import { APP_GUARD } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -19,6 +19,7 @@ import { TagsModule } from './tags/tags.module';
 import { UsersModule } from './users/users.module';
 import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
 import { CreateGoogleUserProvider } from './users/providers/create-google-user.provider';
+import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
 
 // Get the current NODE_ENV
 const ENV = process.env.NODE_ENV;
@@ -63,6 +64,10 @@ const ENV = process.env.NODE_ENV;
     {
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: DataResponseInterceptor,
     },
     AccessTokenGuard,
   ],

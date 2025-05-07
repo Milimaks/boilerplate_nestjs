@@ -5,7 +5,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImVtYWlsI
 {
   "firstName": "Mark",
   "lastName": "Doe",
-  "email": "mark@doe.com",
+  "email": "mark1@doe.com",
   "password": "Password123#"
 }
 

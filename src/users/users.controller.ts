@@ -1,5 +1,6 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   DefaultValuePipe,
   Get,
@@ -8,18 +9,16 @@ import {
   Patch,
   Post,
   Query,
-  SetMetadata,
-  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { AuthType } from 'src/auth/enums/auth-type.enum';
 import { CreateManyUsersDto } from './dtos/create-many-users.dto';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
 import { UsersService } from './providers/users.service';
-import { Auth } from 'src/auth/decorators/auth.decorator';
-import { AuthType } from 'src/auth/enums/auth-type.enum';
 
 @Controller('users')
 @ApiTags('Users')
@@ -62,6 +61,7 @@ export class UsersController {
 
   @Post()
   @Auth(AuthType.None)
+  @UseInterceptors(ClassSerializerInterceptor)
   // @SetMetadata('authType', 'none')
   public createUsers(@Body() createUserDto: CreateUserDto) {
     return this.usersService.createUser(createUserDto);
