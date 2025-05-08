@@ -9,6 +9,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import jwtConfig from './auth/config/jwt.config';
 import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
+import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
+import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
 import { PaginationModule } from './common/pagination/pagination.module';
 import appConfig from './config/app.config';
 import databaseConfig from './config/database.config';
@@ -16,10 +18,8 @@ import enviromentValidation from './config/environment.validation';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { PostsModule } from './posts/posts.module';
 import { TagsModule } from './tags/tags.module';
+import { UploadsModule } from './uploads/uploads.module';
 import { UsersModule } from './users/users.module';
-import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
-import { CreateGoogleUserProvider } from './users/providers/create-google-user.provider';
-import { DataResponseInterceptor } from './common/interceptors/data-response/data-response.interceptor';
 
 // Get the current NODE_ENV
 const ENV = process.env.NODE_ENV;
@@ -56,6 +56,7 @@ const ENV = process.env.NODE_ENV;
     TagsModule,
     MetaOptionsModule,
     PaginationModule,
+    UploadsModule,
   ],
   controllers: [AppController],
   providers: [
