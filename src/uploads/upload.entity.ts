@@ -24,7 +24,7 @@ export class Upload {
     length: 1024,
     nullable: false,
   })
-  path: number;
+  path: string;
 
   @Column({
     type: 'enum',
