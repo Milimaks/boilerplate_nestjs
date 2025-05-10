@@ -15,7 +15,6 @@ export class UploadToAwsProvider {
 
   public async fileUpload(file: Express.Multer.File) {
     const s3 = new S3();
-
     try {
       const uploadresult = await s3
         .upload({
@@ -23,10 +22,8 @@ export class UploadToAwsProvider {
           Body: file.buffer,
           Key: this.generateFileName(file),
           ContentType: file.mimetype,
-          ACL: 'public-read',
         })
         .promise();
-
       return uploadresult.Key;
     } catch (error) {
       throw new RequestTimeoutException(error);

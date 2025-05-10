@@ -41,11 +41,11 @@ export class UploadsService {
 
     try {
       // Upload the file to AWS S3
-      const name = await this.uploadToAwsProvider.fileUpload(file);
+      const path = await this.uploadToAwsProvider.fileUpload(file);
       // Generate a new entry in the database
       const uploadFile: UploadFile = {
-        name: name,
-        path: `https://${this.configService.get('appConfig.awsBucketUrl')}/${name}`,
+        name: path,
+        path: `https://${this.configService.get('appConfig.awsCloudfrontUrl')}/${path}`,
         type: fileTypes.IMAGE,
         mime: file.mimetype,
         size: file.size,
