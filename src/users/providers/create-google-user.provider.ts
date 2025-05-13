@@ -1,7 +1,6 @@
 import { ConflictException, Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
-import { FindOneByGooleIdProvider } from './find-one-by-google-id.provider';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { GoogleUser } from '../interfaces/google-user.interface';
 import { User } from '../user.entity';
 
