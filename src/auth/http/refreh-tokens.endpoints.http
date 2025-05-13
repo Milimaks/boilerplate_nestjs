@@ -1,0 +1,8 @@
+POST http://localhost:3000/auth/refresh-tokens
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "refreshToken" : ""
+}
+
