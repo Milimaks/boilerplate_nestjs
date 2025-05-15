@@ -4,3 +4,6 @@ node_modules
 .env.test
 
 dist
+
+# Configuration for typeORM
+typeorm-cli.config.ts 
