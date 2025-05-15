@@ -1,25 +1,22 @@
-import { CreateUserDto } from './../dtos/create-user.dto';
-import { DataSource, Repository } from 'typeorm';
-import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 import {
   BadRequestException,
   HttpException,
   HttpStatus,
-  Inject,
   Injectable,
   RequestTimeoutException,
 } from '@nestjs/common';
-import { User } from '../user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ConfigService, ConfigType } from '@nestjs/config';
-import profileConfig from '../config/profile.config';
-import { UsersCreateManyProvider } from './users-create-many.provider';
+import { Repository } from 'typeorm';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
-import { CreateUserProvider } from './create-user.provider';
-import { FindOneUserByEmailProvider } from './find-one-user-by-email.provider';
-import { FindOneByGooleIdProvider } from './find-one-by-google-id.provider';
-import { CreateGoogleUserProvider } from './create-google-user.provider';
+import { GetUsersParamDto } from '../dtos/get-users-param.dto';
 import { GoogleUser } from '../interfaces/google-user.interface';
+import { User } from '../user.entity';
+import { CreateUserDto } from './../dtos/create-user.dto';
+import { CreateGoogleUserProvider } from './create-google-user.provider';
+import { CreateUserProvider } from './create-user.provider';
+import { FindOneByGoogleIdProvider } from './find-one-by-google-id.provider';
+import { FindOneUserByEmailProvider } from './find-one-user-by-email.provider';
+import { UsersCreateManyProvider } from './users-create-many.provider';
 
 /**
  * Controller class for '/users' API endpoint
@@ -32,9 +29,6 @@ export class UsersService {
      */
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-
-    @Inject(profileConfig.KEY)
-    private readonly profileConfiguration: ConfigType<typeof profileConfig>,
 
     /**
      * Inject UsersCreateMany provider
@@ -51,7 +45,7 @@ export class UsersService {
     /**
      * Inject findOneByGoogleIdProvider
      */
-    private readonly findOneByGoogleIdProvider: FindOneByGooleIdProvider,
+    private readonly findOneByGoogleIdProvider: FindOneByGoogleIdProvider,
     /**
      * Inject createGoogleUserProvider
      */

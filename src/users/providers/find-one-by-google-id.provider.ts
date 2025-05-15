@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from '../user.entity';
 
 @Injectable()
-export class FindOneByGooleIdProvider {
+export class FindOneByGoogleIdProvider {
   constructor(
     /**
      * Inject usersRepository
